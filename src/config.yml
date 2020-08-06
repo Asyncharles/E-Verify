@@ -1,0 +1,24 @@
+#Welcome on the E-Verify config. Here you can config messages, and many more!
+# IMPORTANT : Be sure to enter a database (COMING SOON) and to config the emails correctly!
+
+mails:
+  user: "exemple@domain.com"
+  password: "xxxxx"
+  gmail: true  #If you DO NOT USE A GMAIL EMAIL, please configure below!
+  othermailconfig:
+    smtphost: "xxxxx"  #The smtp host of the mail
+    smtpport: 587    #The smtp port of the mail
+
+  messages:
+    subject: "Verification Email"
+
+
+verification:
+  attempts: 2 #Attemps before kick & needs to reverify.
+
+  messages:
+    verified: "&aYou are now verified!"
+    afterattempts: "&cYou failed to enter the code"
+
+command:
+  adminpermission: "ev.admin"  #Permission to use admin commands

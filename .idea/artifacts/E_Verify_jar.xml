@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="E-Verify:jar">
+    <output-path>C:/Users/troll/Desktop/Desktop/Server Local/plugins</output-path>
+    <root id="archive" name="E-Verify.jar">
+      <element id="module-output" name="E-Verify" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../javax.mail.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
