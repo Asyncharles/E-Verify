@@ -1,5 +1,6 @@
 package net.everify;
 
+import net.everify.api.MailManager;
 import net.everify.commands.CommandHandler;
 import net.everify.mail.JavaMail;
 import net.everify.sql.DatabaseManager;
@@ -13,6 +14,8 @@ public class EVerify extends JavaPlugin {
 
     private static EVerify INSTANCE;
 
+    private MailManager mailManager;
+
     private Logger logger = getServer().getLogger();
     private DatabaseManager databaseManager;
 
@@ -20,6 +23,8 @@ public class EVerify extends JavaPlugin {
     public void onEnable() {
         INSTANCE = this;
         saveDefaultConfig();
+
+        mailManager = new MailManager(this);
 
         databaseManager = new DatabaseManager(getConfig().getString("database.host"),
                 getConfig().getInt("database.port"),
