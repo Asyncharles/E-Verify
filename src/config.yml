@@ -12,6 +12,13 @@ mails:
   messages:
     subject: "Verification Email"
 
+database:
+  host: " "   #Your database host
+  databasename: " "   #Your database name
+  username: " "    #The username to access the database
+  password: " "    #The password to access the database with the username
+  port: 1433       #The port to access the database
+
 
 verification:
   attempts: 2 #Attemps before kick & needs to reverify.
