@@ -1,5 +1,6 @@
 package net.everify.commands;
 
+import net.everify.EVerify;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -27,6 +28,25 @@ public class FindCommand extends EVCommand {
 
         } else {
             UUID id = Bukkit.getOfflinePlayer(args[1]).getUniqueId();
+            
+            EVerify.getInstance().getDatabaseManager().getPlayerInformation(id).whenComplete(((objects, ex) -> {
+
+                boolean hasData = (boolean) objects[0];
+
+                player.sendMessage(" ");
+
+                if(hasData) {
+                    player.sendMessage("§eName : §b" + player.getName());
+                    player.sendMessage("§eVerified : §aYES");
+                    player.sendMessage("§eEmail : §b" + objects[1]);
+                    player.sendMessage("§eVerification code : §b" + objects[2]);
+
+                } else {
+                    player.sendMessage("§eName : §b" + player.getName());
+                    player.sendMessage("§eVerified : §cNO");
+                }
+
+            }));
 
         }
 

@@ -44,9 +44,10 @@ public class MailManager {
                 }
             }
 
-        }.runTaskAsynchronously(ev.getInstance());
+        }.runTaskAsynchronously(ev);
 
         return addressList;
+
     }
 
 }

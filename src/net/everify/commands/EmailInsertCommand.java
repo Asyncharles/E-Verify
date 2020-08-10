@@ -4,6 +4,7 @@ import net.everify.EVerify;
 import net.everify.mail.JavaMail;
 import net.everify.utils.GUI;
 import net.everify.utils.ItemStackBuilder;
+import org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
@@ -11,6 +12,7 @@ import javax.mail.internet.AddressException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EmailInsertCommand extends EVCommand{
 
@@ -40,7 +42,7 @@ public class EmailInsertCommand extends EVCommand{
                     " §8→ Click to confirm").create(), (p, event) -> {
                 int code = randomCodeGenerator();
                 JavaMail.sendVerificationEmail(email, code, player);
-                new AwaitingVerification(player.getUniqueId(), code);
+                new AwaitingVerification(player.getUniqueId(), code, email);
                 p.closeInventory();
             });
             confirmation.setItem(4, new ItemStackBuilder(Material.DETECTOR_RAIL).name("§6Information").lore(" ", "§eSelected email :",

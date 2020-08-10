@@ -8,6 +8,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.*;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
 
 public class DatabaseManager {
 
@@ -78,37 +80,81 @@ public class DatabaseManager {
         }.runTaskAsynchronously(EVerify.getInstance());
     }
 
-    public Object[] getPlayerInformation(UUID id) {
+    public CompletableFuture<Object[]> getPlayerInformation(UUID id) {
 
-        String query = "SELECT * FROM id = '" + Constant.idToBytes(id) + "'";
-        final Object[][] output = new Object[1][1];
+        CompletableFuture<Object[]> future = new CompletableFuture<>();
 
-        new BukkitRunnable() {
-            @Override
-            public void run() {
+        String query = "SELECT * FROM mails WHERE id = ?";
 
-                try {
+        Executors.newCachedThreadPool().submit(() -> {
+            try {
 
-                    Statement statement = connection.createStatement();
-                    ResultSet resultSet = statement.executeQuery(query);
+                Object[] obj = new Object[1];
 
-                    if(resultSet.wasNull()) {
-                        Object[] obj = {false};
-                        output[0] = obj;
-                    } else {
-                        output[0] = new Object[]{true, resultSet.getString("mail") + "@" + resultSet.getString("domain"), resultSet.getInt("code")};
-                    }
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setObject(1, Constant.idToBytes(id));
+                ResultSet resultSet = statement.executeQuery();
 
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                if(!resultSet.next()) {
+                   obj[0] = false;
+
+                } else {
+                    obj = new Object[]{true, resultSet.getString(2) + "@" + resultSet.getString(3), resultSet.getInt(4)};
                 }
+
+                future.complete(obj);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+        });
 
-        }.runTaskAsynchronously(EVerify.getInstance());
-
-        return output;
+        return future;
 
     }
+
+    public CompletableFuture<Boolean> isPlayerVerified(UUID id) {
+
+        CompletableFuture<Boolean> future = new CompletableFuture<>();
+
+        String query = "SELECT * FROM mails WHERE id = ?";
+
+        Executors.newCachedThreadPool().submit(() -> {
+            try {
+
+                PreparedStatement statement = connection.prepareStatement(query);
+                statement.setObject(1, Constant.idToBytes(id));
+                ResultSet resultSet = statement.executeQuery();
+
+                future.complete(resultSet.next());
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+
+        return future;
+    }
+
+    public void dropSQLTables() {
+
+        String query = "DROP TABLES `mails`";
+
+        Executors.newCachedThreadPool().submit(() -> {
+
+            try {
+
+                Statement statement = connection.createStatement();
+                statement.execute(query);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        });
+
+    }
+
 
 
 
