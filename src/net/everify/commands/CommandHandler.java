@@ -12,6 +12,8 @@ public class CommandHandler implements CommandExecutor {
     public CommandHandler() {
         new EmailInsertCommand();
         new VerifyCommand();
+        new FindCommand();
+        new DropTablesCommand();
     }
 
     @Override
