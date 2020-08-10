@@ -7,6 +7,7 @@ import net.everify.sql.DatabaseManager;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.sql.SQLException;
 import java.util.logging.Logger;
 
 
@@ -32,10 +33,17 @@ public class EVerify extends JavaPlugin {
                 getConfig().getString("database.username"),
                 getConfig().getString("database.password"));
 
+        try {
+            databaseManager.openConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         getCommand("ev").setExecutor(new CommandHandler());
         if(!isConfigValid()) {
             logger.info(ChatColor.DARK_RED + "ERROR : Config isn't valid");
         }
+
     }
 
     @Override

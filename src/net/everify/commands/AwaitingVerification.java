@@ -1,16 +1,18 @@
 package net.everify.commands;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import java.util.HashMap;
 import java.util.UUID;
 
 public class AwaitingVerification {
 
-    private static HashMap<UUID, Integer> awaiting = new HashMap<>();
+    private static HashMap<UUID, Pair<Integer, String>> awaiting = new HashMap<>();
     private static HashMap<UUID, Integer> attempts = new HashMap<>();
 
-    public AwaitingVerification(UUID id, int code) {
+    public AwaitingVerification(UUID id, int code, String mail) {
         if(!awaiting.containsKey(id)) {
-            awaiting.put(id, code);
+            awaiting.put(id, Pair.of(code, mail));
             attempts.put(id, 0);
         }
     }
@@ -20,7 +22,11 @@ public class AwaitingVerification {
     }
 
     public static boolean verify(UUID id, int code) {
-        return awaiting.get(id) == code;
+        return awaiting.get(id).getLeft() == code;
+    }
+
+    public static String getMail(UUID id) {
+        return awaiting.get(id).getRight();
     }
 
     public static void removeID(UUID id) {

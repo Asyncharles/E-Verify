@@ -1,7 +1,10 @@
 package net.everify.commands;
 
 import net.everify.Constant;
+import net.everify.EVerify;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class VerifyCommand extends EVCommand{
 
@@ -19,15 +22,26 @@ public class VerifyCommand extends EVCommand{
             }
             if (args[1].length() == 4) {
                 int code = Integer.parseInt(args[1]);
+                UUID id = player.getUniqueId();
+
                 if(AwaitingVerification.verify(player.getUniqueId(), code)) {
+
+                    String mail = AwaitingVerification.getMail(id);
+
                     AwaitingVerification.removeID(player.getUniqueId());
                     player.sendMessage(Constant.getVerifiedMessage());
+                    EVerify.getInstance().getDatabaseManager().insertEmail(id, mail, code);
+
                 } else if (AwaitingVerification.getAttempts(player.getUniqueId()) == Constant.getAttempts()){
+
                     player.kickPlayer(Constant.getAfterAttemptsMessage());
                     AwaitingVerification.removeID(player.getUniqueId());
+
                 } else {
+
                     player.sendMessage("§cWrong code");
                     AwaitingVerification.addAttempts(player.getUniqueId());
+
                 }
 
             } else {

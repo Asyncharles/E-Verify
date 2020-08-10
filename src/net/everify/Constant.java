@@ -2,6 +2,10 @@ package net.everify;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.UUID;
+
 public class Constant {
 
     private static FileConfiguration file = EVerify.getInstance().getConfig();
@@ -44,6 +48,22 @@ public class Constant {
 
     public final static String getAdminPermission() {
         return file.getString("command.adminpermission");
+    }
+
+
+
+    public final static byte[] idToBytes(UUID id) {
+        return ByteBuffer.wrap(new byte[16])
+                .order(ByteOrder.BIG_ENDIAN)
+                .putLong(id.getMostSignificantBits())
+                .putLong(id.getLeastSignificantBits()).array();
+    }
+
+    public final static UUID bytesToId(byte[] bytes) {
+        ByteBuffer buffer = ByteBuffer.wrap(bytes).order(ByteOrder.BIG_ENDIAN);
+        long idLong = buffer.getLong();
+        long idLongS = buffer.getLong();
+        return new UUID(idLong, idLongS);
     }
 
 
