@@ -14,6 +14,7 @@ public class CommandHandler implements CommandExecutor {
         new VerifyCommand();
         new FindCommand();
         new DropTablesCommand();
+        new ReloadCommand();
     }
 
     @Override

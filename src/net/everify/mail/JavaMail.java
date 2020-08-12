@@ -30,7 +30,6 @@ public class JavaMail {
         }
 
 
-
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
