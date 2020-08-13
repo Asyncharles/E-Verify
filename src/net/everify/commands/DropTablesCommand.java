@@ -21,6 +21,7 @@ public class DropTablesCommand extends EVCommand {
 
         EVerify.getInstance().getDatabaseManager().dropSQLTables();
         try {
+            EVerify.getInstance().getDatabaseManager().getConnection().close();
             EVerify.getInstance().getDatabaseManager().openConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
