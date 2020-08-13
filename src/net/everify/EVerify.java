@@ -68,6 +68,8 @@ public class EVerify extends JavaPlugin {
         return databaseManager;
     }
 
+    public MailManager getMailManager() { return mailManager; }
+
     public void log(String... args) {
         for(String arg : args) {
             logger.info(arg);

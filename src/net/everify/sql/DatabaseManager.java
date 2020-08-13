@@ -27,6 +27,11 @@ public class DatabaseManager {
 
     }
 
+    /**
+     * Opens the connection to the database
+     * @throws SQLException
+     */
+
     public void openConnection() throws SQLException {
 
         if(connection != null && !connection.isClosed()) {
@@ -49,9 +54,21 @@ public class DatabaseManager {
 
     }
 
+    /**
+     *
+     * @return the connection to the database
+     */
+
     public Connection getConnection() {
         return connection;
     }
+
+    /**
+     * Inserts an email associated to a player UUID in the database
+     * @param id Players UUID (PRIMARY KEY)
+     * @param mail Players mail
+     * @param code Code use to verify
+     */
 
     public void insertEmail(UUID id, String mail, int code) {
 
@@ -79,6 +96,15 @@ public class DatabaseManager {
             }
         }.runTaskAsynchronously(EVerify.getInstance());
     }
+
+    /**
+     * Access a players information in the database
+     * @param id Primary key to access a players informatiom
+     * @return a Completable future access, to an array of objects.
+     * 1 argument in the array, is if the player has information stored in the database
+     * 2 argument in the array is the players mail (only returned if [0] is true)
+     * 3 argument in the array is the players code used to verify (only returned if [0] is true)
+     */
 
     public CompletableFuture<Object[]> getPlayerInformation(UUID id) {
 
@@ -113,6 +139,12 @@ public class DatabaseManager {
 
     }
 
+    /**
+     * See if a player is verified
+     * @param id Primary key to access a players informatiom
+     * @return If the player is stored in the database
+     */
+
     public CompletableFuture<Boolean> isPlayerVerified(UUID id) {
 
         CompletableFuture<Boolean> future = new CompletableFuture<>();
@@ -135,6 +167,10 @@ public class DatabaseManager {
 
         return future;
     }
+
+    /**
+     * Drops the SQL tables
+     */
 
     public void dropSQLTables() {
 

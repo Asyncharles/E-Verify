@@ -37,6 +37,11 @@ public class MailHTMLCode {
 
     }
 
+    /**
+     *
+     * @return The email HTML code
+     */
+
     public String getHTMLCode() {
         return htmlcode;
 

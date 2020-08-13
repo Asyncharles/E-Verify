@@ -13,6 +13,13 @@ import java.util.Properties;
 
 public class JavaMail {
 
+    /**
+     * Opens a session to the senders a email
+     * @param receiver the email of the user that will receive an email
+     * @param code the code, that the user will use to verify
+     * @param player the player that will verify
+     */
+
     public final static void sendVerificationEmail(String receiver, int code, Player player) {
 
         Properties properties = new Properties();
@@ -47,6 +54,16 @@ public class JavaMail {
         }
 
     }
+
+    /**
+     *
+     * @param session The session to the senders email
+     * @param senderEmail The senders email
+     * @param receiver The users email that will receive an email
+     * @param code The code use to verify
+     * @param player The player
+     * @return A message (HTML CODE)
+     */
 
     private static Message verificationMessage(Session session, String senderEmail, String receiver, int code, Player player) {
         try {

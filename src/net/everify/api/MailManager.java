@@ -20,6 +20,11 @@ public class MailManager {
     }
 
 
+    /**
+     *
+     * @return The lisf of all the available emails
+     */
+
     public List<String> getAllMails() {
 
         List<String> addressList = new ArrayList<>();

@@ -1,5 +1,5 @@
 #Welcome on the E-Verify config. Here you can config messages, and many more!
-# IMPORTANT : Be sure to enter a database (COMING SOON) and to config the emails correctly!
+# IMPORTANT : Be sure to enter a database and to config the emails correctly! ENABLE THE APPLICATION ACCESS IF YOU USE GMAIL.
 
 mails:
   user: "exemple@domain.com"
