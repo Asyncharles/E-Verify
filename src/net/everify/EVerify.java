@@ -4,6 +4,7 @@ import net.everify.api.MailManager;
 import net.everify.commands.CommandHandler;
 import net.everify.mail.JavaMail;
 import net.everify.sql.DatabaseManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -42,6 +43,7 @@ public class EVerify extends JavaPlugin {
         getCommand("ev").setExecutor(new CommandHandler());
         if(!isConfigValid()) {
             logger.info(ChatColor.DARK_RED + "ERROR : Config isn't valid");
+            this.getServer().getPluginManager().disablePlugin(this);
         }
 
     }
@@ -57,7 +59,13 @@ public class EVerify extends JavaPlugin {
 
     private final boolean isConfigValid() {
 
-        if(Constant.getSenderEmail().contains("exemple") || Constant.getSenderPassword().length() <= 4) {
+        if(Constant.getSenderEmail().contains("exemple") || Constant.getSenderPassword().length() <= 4 ||
+                getConfig().getString("database.databasename").equalsIgnoreCase(" ")
+                || getConfig().getString("database.databasename").isEmpty()
+                || getConfig().getString("database.username").equalsIgnoreCase(" ")
+                || getConfig().getString("database.username").isEmpty()
+                || getConfig().getString("database.password").equalsIgnoreCase(" ")
+                || getConfig().getString("database.password").isEmpty()) {
             return false;
         }
         return true;

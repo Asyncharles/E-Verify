@@ -2,6 +2,8 @@ package net.everify.commands;
 
 import net.everify.Constant;
 import net.everify.EVerify;
+import net.everify.api.events.PlayerVerifyEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -28,9 +30,15 @@ public class VerifyCommand extends EVCommand{
 
                     String mail = AwaitingVerification.getMail(id);
 
-                    AwaitingVerification.removeID(player.getUniqueId());
-                    player.sendMessage(Constant.getVerifiedMessage());
-                    EVerify.getInstance().getDatabaseManager().insertEmail(id, mail, code);
+                    PlayerVerifyEvent event = new PlayerVerifyEvent(player, mail, code);
+                    Bukkit.getPluginManager().callEvent(event);
+
+                    if(!event.isCancelled()) {
+                        AwaitingVerification.removeID(player.getUniqueId());
+                        player.sendMessage(Constant.getVerifiedMessage());
+                        EVerify.getInstance().getDatabaseManager().insertEmail(id, mail, code);
+                        return;
+                    }
 
                 } else if (AwaitingVerification.getAttempts(player.getUniqueId()) == Constant.getAttempts()){
 

@@ -3,6 +3,8 @@ package net.everify.mail;
 
 import net.everify.Constant;
 import net.everify.EVerify;
+import net.everify.api.events.AsyncMailEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import javax.mail.*;
@@ -49,8 +51,12 @@ public class JavaMail {
 
         Executors.newCachedThreadPool().submit(() -> {
             try {
-                Transport.send(message);
-                EVerify.getInstance().log("Email sent to " + receiver + " with code " + code);
+                AsyncMailEvent event = new AsyncMailEvent(player, session, Constant.getSenderEmail(), receiver, message);
+                Bukkit.getPluginManager().callEvent(event);
+                if(!event.isCancelled()) {
+                    Transport.send(event.getMessage());
+                    EVerify.getInstance().log("Email sent to " + receiver + " with code " + code);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

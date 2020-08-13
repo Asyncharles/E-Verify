@@ -1,6 +1,7 @@
 package net.everify.commands;
 
 import net.everify.EVerify;
+import net.everify.api.events.PlayerVerifyEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
