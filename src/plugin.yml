@@ -1,5 +1,5 @@
 name: EVerify
-version: 0.1
+version: 0.1.4
 author: Aksyo
 main: net.everify.EVerify
 commands:
