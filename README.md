@@ -5,4 +5,4 @@ This project, is a verification process, working with a 4 digit code sent to an 
 
 # Current Status
 
-This project is currently under development, if you have any suggestions, or a bug to report, please add Aksyo#0001 on Discord.
+This project is currently under development (available on spigot), if you have any suggestions, or a bug to report, please add Aksyo#0001 on Discord.
