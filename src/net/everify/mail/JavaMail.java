@@ -9,6 +9,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.concurrent.Executors;
 
 
 public class JavaMail {
@@ -46,12 +47,14 @@ public class JavaMail {
 
         Message message = verificationMessage(session, Constant.getSenderEmail(), receiver, code, player);
 
-        try {
-            Transport.send(message);
-            EVerify.getInstance().log("Email sent to " + receiver + " with code " + code);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Executors.newCachedThreadPool().submit(() -> {
+            try {
+                Transport.send(message);
+                EVerify.getInstance().log("Email sent to " + receiver + " with code " + code);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
 
     }
 

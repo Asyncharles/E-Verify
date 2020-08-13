@@ -3,6 +3,8 @@ package net.everify.commands;
 import net.everify.EVerify;
 import org.bukkit.entity.Player;
 
+import java.sql.SQLException;
+
 public class DropTablesCommand extends EVCommand {
 
     public DropTablesCommand() {
@@ -18,6 +20,11 @@ public class DropTablesCommand extends EVCommand {
         }
 
         EVerify.getInstance().getDatabaseManager().dropSQLTables();
+        try {
+            EVerify.getInstance().getDatabaseManager().openConnection();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
         player.sendMessage("§aCleared SQL TABLES | §cDropped table mails");
 

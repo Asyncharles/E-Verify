@@ -24,7 +24,7 @@ public class CommandHandler implements CommandExecutor {
         if(sender instanceof Player) {
             Player player = (Player) sender;
             if(args.length < 1) {
-                //player.sendMessage(Constant.getCommandHelpMessage());
+                player.sendMessage(Constant.getCommandHelpMessage());
                 return true;
             }
 

@@ -1,5 +1,6 @@
 package net.everify;
 
+import net.everify.commands.EVCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.nio.ByteBuffer;
@@ -64,6 +65,16 @@ public class Constant {
         long idLong = buffer.getLong();
         long idLongS = buffer.getLong();
         return new UUID(idLong, idLongS);
+    }
+
+    public final static String getCommandHelpMessage() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(" \n");
+
+        for(EVCommand command : EVCommand.getEvCommandList()) {
+            builder.append("§b/ev " + command.getCommand() + " §6- §e" + command.getDescription() + " §6- §3Is Admin : §d" + command.isAdmin() + "\n");
+        }
+        return builder.toString();
     }
 
 
