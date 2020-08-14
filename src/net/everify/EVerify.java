@@ -26,7 +26,7 @@ public class EVerify extends JavaPlugin {
         INSTANCE = this;
         saveDefaultConfig();
 
-        mailManager = new MailManager(this);
+        mailManager = new MailManager();
 
         databaseManager = new DatabaseManager(getConfig().getString("database.host"),
                 getConfig().getInt("database.port"),
