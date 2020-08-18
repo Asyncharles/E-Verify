@@ -168,6 +168,11 @@ public class DatabaseManager {
         return future;
     }
 
+    /**
+     *
+     * @return the total verifications. array 0 are for normal verifications and arry 1 for forced one
+     */
+
     public CompletableFuture<int[]> getTotalVerifications() {
 
         CompletableFuture<int[]> future = new CompletableFuture<>();
