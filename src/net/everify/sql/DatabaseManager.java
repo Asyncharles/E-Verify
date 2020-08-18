@@ -168,6 +168,40 @@ public class DatabaseManager {
         return future;
     }
 
+    public CompletableFuture<int[]> getTotalVerifications() {
+
+        CompletableFuture<int[]> future = new CompletableFuture<>();
+
+        String query = "SELECT * FROM mails";
+
+        Executors.newCachedThreadPool().submit(() -> {
+
+            try {
+
+                int[] verifications = new int[2];
+
+                Statement statement  = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+
+                while (resultSet.next()) {
+                    if(resultSet.getInt("code") == 0000) {
+                        verifications[1]++;
+                    } else {
+                        verifications[0]++;
+                    }
+                }
+
+                future.complete(verifications);
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });
+
+        return future;
+
+    }
+
     /**
      * Drops the SQL tables
      */

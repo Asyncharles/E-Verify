@@ -37,16 +37,14 @@ public class FindCommand extends EVCommand {
                 boolean hasData = (boolean) objects[0];
 
                 player.sendMessage(" ");
+                player.sendMessage("§eName : §b" + target.getName());
+                player.sendMessage(hasData ? "§eVerified : §aYES" : "§eVerified : §cNO");
 
                 if(hasData) {
-                    player.sendMessage("§eName : §b" + target.getName());
                     player.sendMessage("§eVerified : §aYES");
                     player.sendMessage("§eEmail : §b" + objects[1]);
                     player.sendMessage("§eVerification code : §b" + objects[2]);
 
-                } else {
-                    player.sendMessage("§eName : §b" + target.getName());
-                    player.sendMessage("§eVerified : §cNO");
                 }
 
             }));
