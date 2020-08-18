@@ -1,16 +1,11 @@
 package net.everify.mail;
 
-import com.google.common.base.Strings;
 import com.google.common.io.Resources;
 import net.everify.EVerify;
-import org.apache.commons.io.FileUtils;
 import org.bukkit.Server;
-
 import java.io.IOException;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
 
 public class MailHTMLCode {
 
@@ -33,7 +28,7 @@ public class MailHTMLCode {
         }
 
         htmlcode = htmlcode.replace("%code%", String.valueOf(code)).replace("%name%", name).replace("%id%", id)
-        .replace("%server%", server.getName()).replace("%ip%", server.getIp()).replace("%version%", server.getVersion());
+        .replace("%server%", server.getServerName()).replace("%ip%", server.getIp()).replace("%version%", server.getVersion());
 
     }
 
