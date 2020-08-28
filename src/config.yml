@@ -8,6 +8,8 @@ mails:
   othermailconfig:
     smtphost: "xxxxx"  #The smtp host of the mail
     smtpport: 587    #The smtp port of the mail
+  mailcode:
+    initialized: false  #If the code of the email (in the resources folder), is initialized. IF YOU MODIFIED THE EMAIL CODE PUT TO true.
 
   messages:
     subject: "Verification Email"

@@ -3,13 +3,13 @@ package net.everify.mail;
 import com.google.common.io.Resources;
 import net.everify.EVerify;
 import org.bukkit.Server;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-
 public class MailHTMLCode {
 
-    private String content, style, htmlcode;
+    private String htmlcode, content, style;
 
     private int code;
     private String name, id;
@@ -19,12 +19,13 @@ public class MailHTMLCode {
         this.code = code;
         this.name = name;
         this.id = id;
+
         try {
-            this.content = Resources.toString(getClass().getResource("resources/index.html"), StandardCharsets.UTF_8);
-            this.style = Resources.toString(getClass().getResource("resources/style.css"), StandardCharsets.UTF_8);
+            this.content = Resources.toString(EVerify.getInstance().getHTMLURL(), StandardCharsets.UTF_8);
+            this.style = Resources.toString(EVerify.getInstance().getCssURL(), StandardCharsets.UTF_8);
             this.htmlcode = "<head><style>" + style + "</style></head>" + content;
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
 
         htmlcode = htmlcode.replace("%code%", String.valueOf(code)).replace("%name%", name).replace("%id%", id)

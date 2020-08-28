@@ -2,8 +2,6 @@ package net.everify.api;
 
 import com.sun.istack.internal.NotNull;
 import net.everify.EVerify;
-import org.bukkit.Bukkit;
-import org.bukkit.scheduler.BukkitRunnable;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
