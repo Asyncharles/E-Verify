@@ -1,0 +1,6 @@
+name: EVerify
+version: 0.1.5
+author: Aksyo
+main: net.everify.EVerify
+commands:
+  ev:
