@@ -1,7 +1,7 @@
 package net.everify.commands;
 
-import main.java.net.everify.Constant;
-import main.java.net.everify.EVerify;
+import net.everify.Constant;
+import net.everify.EVerify;
 import net.everify.api.events.PlayerVerifyEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

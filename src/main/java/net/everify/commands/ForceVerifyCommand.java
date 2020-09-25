@@ -1,6 +1,6 @@
 package net.everify.commands;
 
-import main.java.net.everify.EVerify;
+import net.everify.EVerify;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;

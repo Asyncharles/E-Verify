@@ -1,7 +1,6 @@
 package net.everify;
 
 import com.google.common.io.Resources;
-
 import net.everify.api.MailManager;
 import net.everify.commands.CommandHandler;
 import net.everify.sql.DatabaseManager;

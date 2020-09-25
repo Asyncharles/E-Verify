@@ -1,7 +1,7 @@
 package net.everify.api;
 
 import com.sun.istack.internal.NotNull;
-import main.java.net.everify.EVerify;
+import net.everify.EVerify;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;

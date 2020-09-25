@@ -1,9 +1,9 @@
 package net.everify.mail;
 
 import com.google.common.io.Resources;
-import main.java.net.everify.EVerify;
-import org.bukkit.Server;
 
+import net.everify.EVerify;
+import org.bukkit.Server;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 

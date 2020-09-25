@@ -1,6 +1,6 @@
 package net.everify.commands;
 
-import main.java.net.everify.EVerify;
+import net.everify.EVerify;
 import org.bukkit.entity.Player;
 
 import java.sql.SQLException;

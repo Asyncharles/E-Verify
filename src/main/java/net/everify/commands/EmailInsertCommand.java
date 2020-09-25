@@ -1,11 +1,10 @@
 package net.everify.commands;
 
-import main.java.net.everify.EVerify;
-import main.java.net.everify.utils.GUI;
-import main.java.net.everify.utils.ItemStackBuilder;
-import net.everify.commands.AwaitingVerification;
-import net.everify.commands.EVCommand;
+
+import net.everify.EVerify;
 import net.everify.mail.JavaMail;
+import net.everify.utils.GUI;
+import net.everify.utils.ItemStackBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 

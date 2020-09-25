@@ -1,8 +1,9 @@
 package net.everify.mail;
 
 
-import main.java.net.everify.Constant;
-import main.java.net.everify.EVerify;
+
+import net.everify.Constant;
+import net.everify.EVerify;
 import net.everify.api.events.AsyncMailEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

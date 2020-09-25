@@ -2,8 +2,8 @@ package net.everify.sql;
 
 
 
-import main.java.net.everify.Constant;
-import main.java.net.everify.EVerify;
+import net.everify.Constant;
+import net.everify.EVerify;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.*;

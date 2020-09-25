@@ -1,6 +1,6 @@
 package net.everify.commands;
 
-import main.java.net.everify.Constant;
+import net.everify.Constant;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
