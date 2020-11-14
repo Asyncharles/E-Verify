@@ -14,10 +14,10 @@ import java.util.concurrent.Executors;
 public class DatabaseManager {
 
     private Connection connection;
-    private String host, dbName, user, password;
-    private int port;
+    private final String host, dbName, user, password;
+    private final int port;
 
-    public DatabaseManager(String host, int port, String dbName, String user, String password) {
+    public DatabaseManager(final String host, final int port, final String dbName, final String user, final String password) {
 
         this.host = host;
         this.dbName = dbName;
@@ -77,10 +77,7 @@ public class DatabaseManager {
 
         byte[] b = Constant.idToBytes(id);
 
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
+        Executors.newCachedThreadPool().submit(() -> {
                 try {
                     PreparedStatement statement = connection.prepareStatement("INSERT INTO mails (id, mail, mdomain, code) VALUES (?, ?, ?, ?)");
                     statement.setObject(1, b);
@@ -93,8 +90,8 @@ public class DatabaseManager {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-            }
-        }.runTaskAsynchronously(EVerify.getInstance());
+            });
+
     }
 
     /**
@@ -110,7 +107,7 @@ public class DatabaseManager {
 
         CompletableFuture<Object[]> future = new CompletableFuture<>();
 
-        String query = "SELECT * FROM mails WHERE id = ?";
+        final String query = "SELECT * FROM mails WHERE id = ?";
 
         Executors.newCachedThreadPool().submit(() -> {
             try {
@@ -149,7 +146,7 @@ public class DatabaseManager {
 
         CompletableFuture<Boolean> future = new CompletableFuture<>();
 
-        String query = "SELECT * FROM mails WHERE id = ?";
+        final String query = "SELECT * FROM mails WHERE id = ?";
 
         Executors.newCachedThreadPool().submit(() -> {
             try {
@@ -170,14 +167,14 @@ public class DatabaseManager {
 
     /**
      *
-     * @return the total verifications. array 0 are for normal verifications and arry 1 for forced one
+     * @return the total verifications. index 0 are for normal verifications and index 1 for forced one
      */
 
     public CompletableFuture<int[]> getTotalVerifications() {
 
         CompletableFuture<int[]> future = new CompletableFuture<>();
 
-        String query = "SELECT * FROM mails";
+        final String query = "SELECT * FROM mails";
 
         Executors.newCachedThreadPool().submit(() -> {
 
@@ -213,12 +210,12 @@ public class DatabaseManager {
 
     public void dropSQLTables() {
 
-        String query = "DROP TABLES `mails`";
+        final String query = "DROP TABLES `mails`";
 
         Executors.newCachedThreadPool().submit(() -> {
 
             try {
-
+                
                 Statement statement = connection.createStatement();
                 statement.execute(query);
 
